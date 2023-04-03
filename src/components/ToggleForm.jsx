@@ -1,7 +1,11 @@
 import React, {  useState } from "react";
 import CheckOutsideClick from "./CheckOutsideClick";
+import TimePicker from 'react-time-picker';
+
 
 const ToggleForm = ({ onSave }) => {
+    const [startingTime, setStartingTime] = useState('');
+    const [endingTime, setEndingTime] = useState('');
     const [title, setTitle] = useState('');
     const [error, setError] = useState(false);
     const [show, setShow] = useState(false);
@@ -12,6 +16,34 @@ const ToggleForm = ({ onSave }) => {
         setShow(false);
     };
 
+    const handleStartingTime = (startsTime) => {
+        setStartingTime(startsTime);
+    };
+
+    const handleEndingTime = (endsTime) => {
+        setEndingTime(endsTime);
+    };
+
+    const handleOnSave = () => {
+        if (title && startingTime && endingTime) {
+            const newEvent = {
+                title,
+                start: startingTime,
+                end: endingTime
+            }
+            onSave(newEvent);
+            
+            
+            setError(false);
+            // setTitle("")
+            // setStartingTime('')
+            // setEndingTime('')
+
+            toggle()
+        } else {
+            setError(true);
+        }
+    }
 
     return (
         <CheckOutsideClick onClickOutside={handleClose}>
@@ -32,24 +64,18 @@ const ToggleForm = ({ onSave }) => {
                             placeholder="Event Name" className={`event-name ${error ? 'error' : ''}`} />
                     </div>
                     <div className="add-event-input">
-                        <input type="text" placeholder="Starts From" className="event-time-from" />
+                        {/* <input type="text" placeholder="Starts From" className="event-time-from" /> */}
+                        < TimePicker onChange={handleStartingTime} value={startingTime}/>
                     </div>
                     <div className="add-event-input">
-                        <input type="text" placeholder="Ends At" className="event-time-to" />
+                        {/* <input type="text" placeholder="Ends At" className="event-time-to" /> */}
+                        < TimePicker onChange={handleEndingTime} value={endingTime}/>
+                        
                     </div>
                 </div>
 
                 <div className="add-event-footer">
-                    <button onClick={() => {
-                        if (title) {
-                            setError(false);
-                            onSave(title);
-                            setTitle("")
-                            toggle()
-                        } else {
-                            setError(true);
-                        }
-                    }} className="add-event-btn">Add Event</button>
+                    <button onClick={handleOnSave} className="add-event-btn">Add Event</button>
 
 
                 </div>

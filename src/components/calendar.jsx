@@ -57,11 +57,7 @@ const Calendar = () => {
     const [days, setDays] = useState([]);
     const [dateDisplay, setDateDisplay] = useState('');
     const [clicked, setClicked] = useState(currentDate);
-    const [events, setEvents] = useState(
-        localStorage.getItem('events') ?
-            JSON.parse(localStorage.getItem('events')) :
-            []
-    );
+    const [events, setEvents] = useState();
     const [isActive, setActive] = React.useState(-1);
 
     const toggleClass = index => setActive(index)
@@ -79,14 +75,44 @@ const Calendar = () => {
 
     const [eventKey, setEventKey] = useState();
 
+    const handleEvetsChange = (eventInfos) => {
+        // console.log(eventInfos.title + " is event infos, " + eventInfos.start + " start and " + eventInfos.end + " is end")
+        const newEvent = {
+            date: clicked,
+            title: eventInfos.title,
+            start: eventInfos.start,
+            end: eventInfos.end
+        }
 
 
-    const eventForDate = date => events.find(e => e.date === date);
+
+        setEvents([...events, newEvent]);
+    };
+    console.log(events)
+
+        const eventForDate = date => {
+            if(Array.isArray(events)) {
+            events.find(e => e.date === date)
+            };
+        };
     // console.log(eventForDate + " is eventFor Date")
+
+    useEffect(() => {
+        const myevents = localStorage.getItem('events');
+
+        if (myevents) {
+            if (Array.isArray(myevents)) {
+                setEvents(JSON.parse(myevents));
+                console.log(myevents + " say hi");
+            }
+        }
+    },);
+
 
     useEffect(() => {
         localStorage.setItem('events', JSON.stringify(events));
     }, [events]);
+    console.log(events + " is my events")
 
     useEffect(() => {
         const dt = new Date();
@@ -232,8 +258,8 @@ const Calendar = () => {
 
 
                     <div className="events">
-                        {events.map((event, index) => (
-                            // console.log(event.date + " event date and clicked: " + clicked)
+                        {Array.isArray(events) && events.map((event, index) => (
+
                             ((event.date === clicked && clicked !== currentDate) ||
                                 (event.date == currentDate && clicked === currentDate)) ? (
                                 <div
@@ -244,20 +270,24 @@ const Calendar = () => {
                                         handleClickOpen(); setEventKey(index)
                                     }}
                                 >
+                                    {console.log(event.date + " event date and clicked: " + clicked)}
 
                                     <div className="title">
                                         <i
                                             className="fas fa-circle"></i>
                                         <h3 className="event-title">{event.title}</h3>
-                                        {/* {console.log(event.title + " is title")}
-                                        {console.log(eventForDate(clicked).title + "from delete")} */}
+                                        {/* {console.log(event.title + " is title")} */}
+                                        {/* {console.log(eventForDate(clicked).title + "from delete")}  */}
                                     </div>
                                     <div className="event-time">
-                                        <span className="event-time">${event.time}</span>
+                                        {/* <span className="event-time">Result </span> */}
+                                        <span className="event-time">{event.start} - {event.end}</span>
+                                        {/* {console.log(event.start + " is start and " + event.end)} */}
                                     </div>
                                 </div>) : "")
                         )}
-                        {!(events.find(e => e.date === clicked)) ? (
+
+                        {Array.isArray(events) && !(events.find(e => e.date === clicked)) ? (
                             <div className="no-event">
                                 <h3>No Events</h3>
                             </div>
@@ -268,9 +298,11 @@ const Calendar = () => {
                     {console.log(events.filter(e => e.date !== clicked + " is clicked and"))} */}
 
                     <ToggleForm
-                        onSave={title => {
-                            setEvents([...events, { title, date: clicked }]);
-                        }} />
+                        onSave={
+                            handleEvetsChange
+
+                            // setEvents([...events, { title, date: clicked }]);
+                        } />
 
                 </div>
             </div>

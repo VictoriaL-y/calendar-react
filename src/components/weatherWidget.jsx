@@ -20,12 +20,12 @@ function WeatherWidget() {
                 + "&lon="
                 + long
                 + "&limit=2&appid="
-                + 'API KEY'
+                + ''
             ).then((response) => response.json())
                 .then((data) => weather.fetchWeather(data));
 
             let weather = {
-                apiKey: "API KEY",
+                apiKey: "",
 
 
                 fetchWeather: function (data) {
