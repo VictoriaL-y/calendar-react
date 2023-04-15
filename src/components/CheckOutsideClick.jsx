@@ -3,10 +3,10 @@ import React, { useRef, useEffect } from "react";
 // For DeleteEvent and ToggleForm components
 const CheckOutsideClick = (props) => {
     const ref = useRef(null);
-    const {onClickOutside, children} = props;
+    const { onClickOutside, children } = props;
 
     const handleClickOutside = (event) => {
-        if(ref.current && !ref.current.contains(event.target)) {
+        if (ref.current && !ref.current.contains(event.target)) {
             onClickOutside && onClickOutside();
         }
     }
@@ -18,7 +18,7 @@ const CheckOutsideClick = (props) => {
         };
     }, [])
 
-    if(!children) {
+    if (!children) {
         return null;
     }
     return <div ref={ref}>{children}</div>;

@@ -7,7 +7,9 @@ export const CalendarHeader = ({ onNext, onBack, dateDisplay }) => {
             <button onClick={onBack} id="buttPrev">
                 <i className="fa-solid fa-chevron-left"></i>
             </button>
+
             {dateDisplay}
+            
             <button onClick={onNext} id="buttNext">
                 <i className="fa-solid fa-chevron-right"></i>
             </button>

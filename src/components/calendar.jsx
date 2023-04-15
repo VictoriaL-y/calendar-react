@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CalendarHeader from "./CalendarHeader";
 import ToggleForm from "./ToggleForm";
 import DeleteEvent from "./DeleteEvent";
 import CheckOutsideClick from "./CheckOutsideClick";
+import StrikeOutEventBtn from "./StrikeOutEventBtn";
 
 const Calendar = () => {
     let monthsOfYear = [
@@ -21,7 +22,6 @@ const Calendar = () => {
     ]
 
     let weekdays = [
-
         'Monday',
         'Tuesday',
         'Wednesday',
@@ -32,7 +32,6 @@ const Calendar = () => {
     ];
 
     let weekdaysShort = [
-
         'Mon',
         'Tue',
         'Wed',
@@ -57,87 +56,105 @@ const Calendar = () => {
     const [days, setDays] = useState([]);
     const [dateDisplay, setDateDisplay] = useState('');
     const [clicked, setClicked] = useState(currentDate);
-    const [events, setEvents] = useState();
+    const [events, setEvents] = useState([]);
     const [isActive, setActive] = React.useState(-1);
-
     const toggleClass = index => setActive(index)
     const [activeDay, setActiveDay] = useState();
     const [activeMonthAndYear, setActiveMonthAndYear] = useState();
     const [activeWeekday, setActiveWeekday] = useState();
     const [show, setShow] = useState(false);
+    const [onOpen, setOnOpen] = useState(false);
+    
+    // get id of the event, which we're going to delete/strike out
+    const [eventId, setEventId] = useState();
+    const [selectedEvents, setSelectedEvents] = useState([]);
+
+    // get id of the event, which we're going to edit
+    const [editId, setEditId] = useState();
+
+    // open and close deleteEvent component (pop up window)
     const handleClickOpen = () => {
         setShow(true);
     };
     const handleClose = () => {
         setShow(false);
     };
-    // const handleShow = () => setShow(!show);
 
-    const [eventKey, setEventKey] = useState();
+    const updateEvents = (events) => {
+        setEvents(events);
+    }
 
-    const handleEvetsChange = (eventInfos) => {
-        // console.log(eventInfos.title + " is event infos, " + eventInfos.start + " start and " + eventInfos.end + " is end")
-        const newEvent = {
-            date: clicked,
-            title: eventInfos.title,
-            start: eventInfos.start,
-            end: eventInfos.end
-        }
-
-
-
+    const handleEventsChange = (newEvent) => {
         setEvents([...events, newEvent]);
     };
-    console.log(events)
 
-        const eventForDate = date => {
-            if(Array.isArray(events)) {
-            events.find(e => e.date === date)
-            };
-        };
-    // console.log(eventForDate + " is eventFor Date")
+    // getting id of the event, which we want to edit
+    const handleEditId = (id) => {
+        setEditId(id);
+    };
+
+    // open toggle form to edit the clicked event
+    const handleEditForm = (isOpen) => {
+        setOnOpen(isOpen);
+    }
+
+    const eventForDate = date => events.find(e => e.date === date);
 
     useEffect(() => {
-        const myevents = localStorage.getItem('events');
+        const myevents = JSON.parse(localStorage.getItem('events'));
 
         if (myevents) {
             if (Array.isArray(myevents)) {
-                setEvents(JSON.parse(myevents));
-                console.log(myevents + " say hi");
+                setEvents(myevents);
             }
         }
-    },);
 
+        const completedEvents = JSON.parse(localStorage.getItem('selectedEvents'));
+
+        if (completedEvents) {
+            if (Array.isArray(completedEvents)) {
+                setSelectedEvents(completedEvents);
+            }
+        }
+    }, []);
 
     useEffect(() => {
-        localStorage.setItem('events', JSON.stringify(events));
-    }, [events]);
-    console.log(events + " is my events")
+
+        if (events.length > 0) {
+            localStorage.setItem('events', JSON.stringify(events));
+        }
+        else if (events.length == 0) {
+            localStorage.setItem('events', JSON.stringify(''));
+        }
+
+        if (selectedEvents.length > 0) {
+            localStorage.setItem('selectedEvents', JSON.stringify(selectedEvents));
+        }
+        else if (selectedEvents.length == 0) {
+            localStorage.setItem('selectedEvents', JSON.stringify(''));
+        }
+
+
+    }, [events, selectedEvents]);
 
     useEffect(() => {
         const dt = new Date();
 
         if (nav !== 0) {
             dt.setMonth(new Date().getMonth() + nav);
-
         }
 
         const day = dt.getDate();
-        // console.log(day + " is a day")
         const month = dt.getMonth();
         const year = dt.getFullYear();
-
         const firstDayOfMonth = new Date(year, month, 1);
-        // console.log(firstDayOfMonth + " is a first day of month")
         const daysInMonth = new Date(year, month + 1, 0).getDate();
-        // console.log("days in month are " + daysInMonth)
         const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
             weekday: "long",
             year: "numeric",
             month: 'numeric',
             day: "numeric",
         });
-        // console.log(dateString)
 
         setDateDisplay(`${dt.toLocaleDateString('en-us', { month: 'long' })} ${year}`);
 
@@ -147,7 +164,6 @@ const Calendar = () => {
 
         for (let i = 1; i <= paddingDays + daysInMonth; i++) {
             const dayString = `${month + 1}/${i - paddingDays}/${year}`;
-            // console.log(dayString)
 
             if (i > paddingDays) {
                 daysArr.push({
@@ -156,6 +172,7 @@ const Calendar = () => {
                     isCurrentDay: i - paddingDays === day && nav === 0,
                     date: dayString,
                 });
+
             } else {
                 daysArr.push({
                     value: 'padding',
@@ -168,11 +185,6 @@ const Calendar = () => {
 
         setDays(daysArr);
     }, [events, nav]);
-
-
-    // console.log(dateDisplay)
-    // console.log(clicked)
-    // console.log(activeDay)
 
     return (
         <>
@@ -196,6 +208,7 @@ const Calendar = () => {
                     </div>
 
                     <div id="calendarBody">
+                        {/* Create all the Calendar's cells */}
                         {days.map((d, index) => (
                             (activeMonthAndYear == undefined && d.isCurrentDay ? (
                                 <div
@@ -208,21 +221,20 @@ const Calendar = () => {
                                 <div
                                     key={index}
                                     day={d}
-                                    className={`day ${d.value === 'padding' ? 'padding' : ''} ${d.isCurrentDay ? 'today' : ''} 
-                            ${d.event ? 'event' : ''}
-                        ${(isActive == index &&
-                                            (activeMonthAndYear == dateDisplay)) &&
-                                        'active'}`}
-
-
+                                    className={`day ${d.value === 'padding' ? 'padding' : ''} 
+                                                    ${d.isCurrentDay ? 'today' : ''} 
+                                                    ${d.event ? 'event' : ''}
+                                                    ${(isActive == index
+                                            && (activeMonthAndYear == dateDisplay))
+                                        && 'active'}`}
 
                                     onClick={() => {
+
                                         if (d.value !== 'padding') {
                                             toggleClass(index);
                                             setClicked(d.date);
                                             setActiveDay(d.value);
                                             setActiveMonthAndYear(dateDisplay)
-
                                             let choosedDate = new Date(d.date);
                                             let weekdayNum = choosedDate.getDay()
                                             if (weekdayNum == 0) {
@@ -247,7 +259,6 @@ const Calendar = () => {
                     <div className="today-date">
                         <div className="event-day">
                             {(activeDay == undefined && activeMonthAndYear == undefined) ? currentWeekday : activeWeekday}
-
                         </div>
                         <div className="event-date">
                             {activeDay != undefined ? (activeDay + " " + activeMonthAndYear) : ''}
@@ -255,75 +266,96 @@ const Calendar = () => {
                         </div>
                     </div>
 
-
-
                     <div className="events">
-                        {Array.isArray(events) && events.map((event, index) => (
+                        {/* Create all the events */}
+                        {events.map((event, index) => (
 
-                            ((event.date === clicked && clicked !== currentDate) ||
-                                (event.date == currentDate && clicked === currentDate)) ? (
+                            (event.date === clicked) ? (
                                 <div
                                     key={index}
                                     event={event}
-                                    className="event"
                                     onClick={() => {
-                                        handleClickOpen(); setEventKey(index)
+                                        handleEditId(event.id);
+                                        handleEditForm(true);
                                     }}
+                                    className={`event ${(event.status === true)
+                                        ? "strikeOut" : ""}`}
                                 >
-                                    {console.log(event.date + " event date and clicked: " + clicked)}
 
                                     <div className="title">
-                                        <i
-                                            className="fas fa-circle"></i>
+                                        {(onOpen && event.id === editId) ? <i className="fa-solid fa-gear"></i>
+                                            : <i className="fas fa-circle circle"></i>}
                                         <h3 className="event-title">{event.title}</h3>
-                                        {/* {console.log(event.title + " is title")} */}
-                                        {/* {console.log(eventForDate(clicked).title + "from delete")}  */}
                                     </div>
                                     <div className="event-time">
-                                        {/* <span className="event-time">Result </span> */}
                                         <span className="event-time">{event.start} - {event.end}</span>
-                                        {/* {console.log(event.start + " is start and " + event.end)} */}
                                     </div>
+
+                                    {/* Event strikethrough button */}
+                                    < StrikeOutEventBtn
+                                        onStrikeOut={() => {
+
+                                            if (selectedEvents.find(e => e === event.id) !== undefined) {
+                                                setSelectedEvents(selectedEvents.filter(e => e !== event.id));
+                                                event.status = false;
+                                                console.log(event)
+                                            } else {
+                                                setSelectedEvents(selectedEvents => [...selectedEvents, event.id]);
+                                                event.status = true;
+                                                console.log(event)
+                                            }
+                                        }} />
+
+                                    {/* Button for deleting an event */}
+                                    <button
+                                        className="deleteEventBtn"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleClickOpen();
+                                            setEventId(event.id);
+                                        }}
+                                    >
+                                        <i className="fa-solid fa-xmark deleteEventBtn"></i>
+                                    </button>
                                 </div>) : "")
                         )}
 
-                        {Array.isArray(events) && !(events.find(e => e.date === clicked)) ? (
+                        {/* If there is no event on the clicked day */}
+                        {!(events.find(e => e.date === clicked)) ? (
                             <div className="no-event">
                                 <h3>No Events</h3>
                             </div>
                         ) : ''}
                     </div>
 
-                    {/* {console.log(clicked + " is clicked and")}
-                    {console.log(events.filter(e => e.date !== clicked + " is clicked and"))} */}
-
+                    {/* Toggle fowm for editing and adding event */}
                     <ToggleForm
-                        onSave={
-                            handleEvetsChange
-
-                            // setEvents([...events, { title, date: clicked }]);
-                        } />
-
+                        clicked={clicked}
+                        onSave={handleEventsChange}
+                        events={events}
+                        setEvents={updateEvents}
+                        editId={editId}
+                        setEditId={handleEditId}
+                        onOpen={onOpen}
+                        setOnOpen={handleEditForm}
+                    />
                 </div>
             </div>
 
-
+            {/* Event delete pop up window  */}
             <CheckOutsideClick onClickOutside={handleClose}>
                 {show === true &&
                     < DeleteEvent
                         show={show}
-                        // eventText={eventForDate(clicked).title}
                         onDelete={() => {
-                            setEvents(events.filter((e, index) => index !== eventKey));
+                            setEvents(events.filter(e => e.id !== eventId));
+                            setSelectedEvents(selectedEvents.filter(e => e !== eventId));
                             handleClose();
                         }}
                         onClose={handleClose}
-
-
                     />
                 }
             </CheckOutsideClick>
-
         </>
     )
 }

@@ -1,7 +1,6 @@
-import React, { Component, useState } from "react";
-import WeatherWidget from "./components/weatherWidget";
+import React from "react";
+import WeatherWidget from "./components/WeatherWidget";
 import Calendar from "./components/Calendar";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
@@ -16,10 +15,9 @@ const App = () => {
         <div className="col-1 col-lg-2"></div>
         <div id="calendar" className="col-10 col-lg-8 container-fluid p-0">
           <div id="month-year"></div>
-          
-            <Calendar />
-            
-          
+
+          <Calendar />
+
         </div>
         <div className="col-1 col-lg-2"></div>
       </div>
