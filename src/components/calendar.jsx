@@ -64,7 +64,7 @@ const Calendar = () => {
     const [activeWeekday, setActiveWeekday] = useState();
     const [show, setShow] = useState(false);
     const [onOpen, setOnOpen] = useState(false);
-    
+
     // get id of the event, which we're going to delete/strike out
     const [eventId, setEventId] = useState();
     const [selectedEvents, setSelectedEvents] = useState([]);

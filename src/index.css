@@ -255,16 +255,15 @@ body .calendar {
 }
 
 #calendar .events .event.strikeOut .strikeThroughBtn {
-  color: var(--hover-active-color);
+  color: var(--main-font-color);
 }
 
-#calendar .events .event.strikeOut button .strikeThroughBtn {
-  border: none;
-  background-color: transparent;
-}
-
-#calendar .events .event:hover.strikeOut button .strikeThroughBtn {
+#calendar .events .event:hover i.strikeThroughBtn:hover {
   color: #fff;
+}
+
+#calendar .events .event.strikeOut i.strikeThroughBtn:hover {
+  color: var(--hover-active-color);
 }
 
 /* *** */
@@ -296,7 +295,8 @@ body .calendar {
   color: var(--hover-active-color);
 }
 
-#calendar .events .event:hover i {
+#calendar .events .event:hover i.circle,
+#calendar .events .event i.deleteEventBtn:hover {
   color: #fff;
 }
 
