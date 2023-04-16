@@ -1,5 +1,8 @@
 import React, { useEffect} from "react";
 
+
+const apiKey=process.env.REACT_APP_API_KEY;
+
 function WeatherWidget() {
     let lat;
     let long;
@@ -18,12 +21,12 @@ function WeatherWidget() {
                 + "&lon="
                 + long
                 + "&limit=2&appid="
-                + 'APIKEY'
+                + apiKey
             ).then((response) => response.json())
                 .then((data) => weather.fetchWeather(data));
 
             let weather = {
-                apiKey: "APIKEY",
+                apiKey: apiKey,
 
                 fetchWeather: function (data) {
                     console.log(data)
