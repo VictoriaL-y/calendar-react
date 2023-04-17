@@ -654,7 +654,7 @@ body .calendar {
   #root .card {
     position: relative;
     height: 100vh;
-    padding-top: 65%;
+    padding-top: 50%;
   }
 
   body .calendar {
@@ -804,5 +804,11 @@ body .calendar {
     height: 25px;
     width: 70px;
     font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #root .card {
+    padding-top: 65%;
   }
 }
