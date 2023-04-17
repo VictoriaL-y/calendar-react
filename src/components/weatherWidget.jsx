@@ -61,6 +61,14 @@ function WeatherWidget() {
             }
         }
         const error = () => {
+            document.querySelector(".city").innerText = "For weather info:";
+            document.querySelector(".humidity").innerHTML = `
+            <div class="error-weather">
+            <p>- Turn on your device location</p>
+            <p>- Allow to access your location</p>
+            <p>- Refresh the page</p>
+            </div>`
+            // document.querySelector(".wind").innerText = "- Allow to access your location";
         }
         navigator.geolocation.getCurrentPosition(success, error);
     }, []);
