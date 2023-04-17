@@ -258,7 +258,7 @@ body .calendar {
   color: var(--main-font-color);
 }
 
-#calendar .events .event:hover i.strikeThroughBtn:hover {
+#calendar .events .event i.strikeThroughBtn:hover {
   color: #fff;
 }
 
