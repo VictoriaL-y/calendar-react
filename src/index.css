@@ -660,7 +660,7 @@ body .calendar {
 
   .calendar #calendar-table #headerMonth {
     font-size: 1.6rem;
-    height: calc(50vh/7);
+    height: calc(var(--vh, 1vh) * 50/7);
     padding-top: 10px;
   }
 
@@ -671,7 +671,7 @@ body .calendar {
   }
 
   .calendar #calendar-table #weekdays {
-    height: calc(50vh/7);
+    height: calc(var(--vh, 1vh) * 50/7);
   }
 
   .calendar #calendar-table #weekdays,
