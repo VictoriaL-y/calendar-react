@@ -258,16 +258,20 @@ body .calendar {
   color: var(--main-font-color);
 }
 
-#calendar .events .event i.strikeThroughBtn:focus {
-  color: transparent;
-}
-
 #calendar .events .event:hover i.strikeThroughBtn:hover {
   color: #fff;
 }
 
+#calendar .events .event:focus i.strikeThroughBtn:hover {
+  color: transparent;
+}
+
 #calendar .events .event.strikeOut i.strikeThroughBtn:hover {
   color: var(--hover-active-color);
+}
+
+#calendar .events .event.strikeOut i.strikeThroughBtn:focus {
+  color: var(--main-font-color);
 }
 
 /* *** */
