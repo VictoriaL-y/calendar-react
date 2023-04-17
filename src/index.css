@@ -664,7 +664,7 @@ body .calendar {
   }
 
   .calendar #calendar-table {
-    height: 52vh;
+    height: 58vh;
   }
 
   .calendar .notes {
@@ -705,7 +705,7 @@ body .calendar {
   }
 
   #calendar .notes {
-    height: 48vh;
+    height: 42vh;
   }
 
   #calendar .notes .today-date {
