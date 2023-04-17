@@ -262,7 +262,7 @@ body .calendar {
   color: #fff;
 }
 
-#calendar .events .event:focus i.strikeThroughBtn:hover {
+#calendar .events .event button.strikeThroughBtn:focus i {
   color: transparent;
 }
 
@@ -270,7 +270,7 @@ body .calendar {
   color: var(--hover-active-color);
 }
 
-#calendar .events .event.strikeOut i.strikeThroughBtn:focus {
+#calendar .events .event.strikeOut button.strikeThroughBtn:focus i {
   color: var(--main-font-color);
 }
 
