@@ -643,14 +643,14 @@ body .calendar {
     padding-top: 50%;
   }
 
-  .calendar {
+  body .calendar {
     position: relative;
     height: calc(var(--vh, 1vh) * 100);
     margin: 0 20px;
   }
 
   .calendar #calendar-table {
-    height: 52vh;
+    height: calc(var(--vh, 1vh) * 52);
   }
 
   .calendar .notes {
@@ -692,7 +692,7 @@ body .calendar {
   }
 
   #calendar .notes {
-    height: 48%;
+    height: calc(var(--vh, 1vh) * 48);
   }
 
   #calendar .notes .today-date {

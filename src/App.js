@@ -12,14 +12,14 @@ const App = () => {
       <WeatherWidget />
 
       <div className="row calendar container-fluid px-0 m-0">
-        <div className="col-1 col-lg-2"></div>
-        <div id="calendar" className="col-10 col-lg-8 container-fluid p-0">
+        <div className="col-sm-1 col-lg-2"></div>
+        <div id="calendar" className="col-xs-12 col-sm-10 col-lg-8 container-fluid p-0">
           <div id="month-year"></div>
 
           <Calendar />
 
         </div>
-        <div className="col-1 col-lg-2"></div>
+        <div className="col-sm-1 col-lg-2"></div>
       </div>
 
     </>
