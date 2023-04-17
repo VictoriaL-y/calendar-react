@@ -258,6 +258,10 @@ body .calendar {
   color: var(--main-font-color);
 }
 
+#calendar .events .event i.strikeThroughBtn:focus {
+  color: transparent;
+}
+
 #calendar .events .event:hover i.strikeThroughBtn:hover {
   color: #fff;
 }
