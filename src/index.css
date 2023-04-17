@@ -650,7 +650,7 @@ body .calendar {
   }
 
   .calendar #calendar-table {
-    height: calc(var(--vh, 1vh) * 52);
+    height: 52vh;
   }
 
   .calendar .notes {
@@ -660,7 +660,7 @@ body .calendar {
 
   .calendar #calendar-table #headerMonth {
     font-size: 1.6rem;
-    height: calc(var(--vh, 1vh) * 50/7);
+    height: calc(50vh/7);
     padding-top: 10px;
   }
 
@@ -671,7 +671,7 @@ body .calendar {
   }
 
   .calendar #calendar-table #weekdays {
-    height: calc(var(--vh, 1vh) * 50/7);
+    height: calc(50vh/7);
   }
 
   .calendar #calendar-table #weekdays,
@@ -692,7 +692,7 @@ body .calendar {
   }
 
   #calendar .notes {
-    height: calc(var(--vh, 1vh) * 48);
+    height: 48vh;
   }
 
   #calendar .notes .today-date {
@@ -711,7 +711,7 @@ body .calendar {
   }
 
   #calendar .notes .events {
-    height: calc(var(--vh, 1vh) * 32);
+    height: 32vh;
   }
 
   #calendar .events .event {
