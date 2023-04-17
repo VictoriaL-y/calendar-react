@@ -645,8 +645,9 @@ body .calendar {
 
   body .calendar {
     position: relative;
+    height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
-    margin: 0 20px;
+    margin: 0 auto;
   }
 
   .calendar #calendar-table {
@@ -792,4 +793,8 @@ body .calendar {
     width: 70px;
     font-size: 0.7rem;
   }
+}
+
+@media screen and (max-width: 575px) {
+  
 }
