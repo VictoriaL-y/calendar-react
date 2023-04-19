@@ -30,7 +30,7 @@ function WeatherWidget() {
 
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", weatherFetchUrl, false); // false for synchronous request
-            xmlHttp.send(null);
+            xmlHttp.send(weatherFetchUrl);
             console.log("XXXXX ->> " + xmlHttp.response)
 
             displayWeather(JSON.parse(xmlHttp.response));
