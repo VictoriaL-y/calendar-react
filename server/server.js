@@ -5,6 +5,7 @@ import { } from 'dotenv/config'
 
 const app = express()
 
+// My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
 const PORT = process.env.PORT || 8000
