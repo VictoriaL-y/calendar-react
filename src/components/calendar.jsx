@@ -44,7 +44,7 @@ const Calendar = () => {
     let currentDate = new Date().toLocaleString().split(",")[0];
     let currentMonthAndYear = monthsOfYear[new Date().getMonth()] + " " + new Date().getFullYear();
     let currentWeekdayNum = new Date().getDay()
-    if (currentWeekdayNum == 0) {
+    if (currentWeekdayNum === 0) {
         currentWeekdayNum = 6
     } else {
         currentWeekdayNum--;
@@ -98,7 +98,7 @@ const Calendar = () => {
         setOnOpen(isOpen);
     }
 
-    const eventForDate = date => events.find(e => e.date === date);
+    const eventForDate = date => events.find(e => e.date ==== date);
 
     useEffect(() => {
         const myevents = JSON.parse(localStorage.getItem('events'));
@@ -123,14 +123,14 @@ const Calendar = () => {
         if (events.length > 0) {
             localStorage.setItem('events', JSON.stringify(events));
         }
-        else if (events.length == 0) {
+        else if (events.length === 0) {
             localStorage.setItem('events', JSON.stringify(''));
         }
 
         if (selectedEvents.length > 0) {
             localStorage.setItem('selectedEvents', JSON.stringify(selectedEvents));
         }
-        else if (selectedEvents.length == 0) {
+        else if (selectedEvents.length === 0) {
             localStorage.setItem('selectedEvents', JSON.stringify(''));
         }
 
@@ -140,7 +140,7 @@ const Calendar = () => {
     useEffect(() => {
         const dt = new Date();
 
-        if (nav !== 0) {
+        if (nav !=== 0) {
             dt.setMonth(new Date().getMonth() + nav);
         }
 
@@ -210,11 +210,11 @@ const Calendar = () => {
                     <div id="calendarBody">
                         {/* Create all the Calendar's cells */}
                         {days.map((d, index) => (
-                            (activeMonthAndYear == undefined && d.isCurrentDay ? (
+                            (activeMonthAndYear === undefined && d.isCurrentDay ? (
                                 <div
                                     key={index}
                                     day={d}
-                                    className={`day today active ${(d.date == currentDate && d.event) ? "event" : ''}`}>
+                                    className={`day today active ${(d.date === currentDate && d.event) ? "event" : ''}`}>
                                     {d.value === 'padding' ? '' : d.value}
                                 </div>
                             ) : (
@@ -224,8 +224,8 @@ const Calendar = () => {
                                     className={`day ${d.value === 'padding' ? 'padding' : ''} 
                                                     ${d.isCurrentDay ? 'today' : ''} 
                                                     ${d.event ? 'event' : ''}
-                                                    ${(isActive == index
-                                            && (activeMonthAndYear == dateDisplay))
+                                                    ${(isActive === index
+                                            && (activeMonthAndYear === dateDisplay))
                                         && 'active'}`}
 
                                     onClick={() => {
@@ -237,7 +237,7 @@ const Calendar = () => {
                                             setActiveMonthAndYear(dateDisplay)
                                             let choosedDate = new Date(d.date);
                                             let weekdayNum = choosedDate.getDay()
-                                            if (weekdayNum == 0) {
+                                            if (weekdayNum === 0) {
                                                 weekdayNum = 6
                                             } else {
                                                 weekdayNum--;
@@ -248,7 +248,7 @@ const Calendar = () => {
                                         }
                                     }}
                                 >
-                                    {d.value == 'padding' ? '' : d.value}
+                                    {d.value=== 'padding' ? '' : d.value}
                                 </div>
                             ))
                         ))}
@@ -258,11 +258,11 @@ const Calendar = () => {
                 <div className="col-lg-4 notes">
                     <div className="today-date">
                         <div className="event-day">
-                            {(activeDay == undefined && activeMonthAndYear == undefined) ? currentWeekday : activeWeekday}
+                            {(activeDay === undefined && activeMonthAndYear === undefined) ? currentWeekday : activeWeekday}
                         </div>
                         <div className="event-date">
-                            {activeDay != undefined ? (activeDay + " " + activeMonthAndYear) : ''}
-                            {(activeDay == undefined && activeMonthAndYear == undefined) ? currentMonthAndYear : ""}
+                            {activeDay !== undefined ? (activeDay + " " + activeMonthAndYear) : ''}
+                            {(activeDay === undefined && activeMonthAndYear === undefined) ? currentMonthAndYear : ""}
                         </div>
                     </div>
 
