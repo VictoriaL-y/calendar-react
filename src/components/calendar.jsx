@@ -98,7 +98,7 @@ const Calendar = () => {
         setOnOpen(isOpen);
     }
 
-    const eventForDate = date => events.find(e => e.date ==== date);
+    const eventForDate = date => events.find(e => e.date === date);
 
     useEffect(() => {
         const myevents = JSON.parse(localStorage.getItem('events'));
@@ -140,7 +140,7 @@ const Calendar = () => {
     useEffect(() => {
         const dt = new Date();
 
-        if (nav !=== 0) {
+        if (nav !== 0) {
             dt.setMonth(new Date().getMonth() + nav);
         }
 
@@ -248,7 +248,7 @@ const Calendar = () => {
                                         }
                                     }}
                                 >
-                                    {d.value=== 'padding' ? '' : d.value}
+                                    {d.value === 'padding' ? '' : d.value}
                                 </div>
                             ))
                         ))}
