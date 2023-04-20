@@ -64,4 +64,5 @@ app.get("/geolocation/:latitude/:longitude", (req, res, next) => {
 
 })
 
-app.listen(PORT, () => console.log(`Server is listening on ${PORT}`))
+app.listen(PORT, 'localhost');
+app.on('listening', () => console.log(`Server is listening on ${PORT}`));

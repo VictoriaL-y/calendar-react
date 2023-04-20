@@ -11,7 +11,7 @@ function WeatherWidget() {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
-            const weatherFetchUrl = "http://localhost:8000/geolocation/" + lat + "/" + long;
+            const weatherFetchUrl = "https://calendar-react-victorial-y.netlify.app/geolocation/" + lat + "/" + long;
 
             const displayWeather = function (data) {
                 const { name } = data.data;
