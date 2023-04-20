@@ -8,10 +8,10 @@ const app = express()
 
 app.use(bodyParser.json());
 
-// My API_KEY and PORT are stored in the folder .env
+// My API_KEY is stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
-const PORT = process.env.PORT || 5000
+const PORT = 8000
 
 app.use(cors())
 
@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get("/geolocation/:latitude/:longitude", (req, res, next) => {
+app.get("/geolocation/:latitude/:longitude", (req, res) => {
     const latitude = req.params.latitude;
     const longitude = req.params.longitude;
     try {
