@@ -11,7 +11,7 @@ function WeatherWidget() {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
-            const weatherFetchUrl = "http://127.0.0.1:8000/geolocation/" + lat + "/" + long;
+            const weatherFetchUrl = "http://localhost:8000/geolocation/" + lat + "/" + long;
 
             const displayWeather = function (data) {
                 const { name } = data.data;
