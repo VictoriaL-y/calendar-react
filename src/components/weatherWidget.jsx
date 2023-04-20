@@ -32,22 +32,12 @@ function WeatherWidget() {
             xmlHttp.open("GET", weatherFetchUrl, true); // false for synchronous request
 
 
-            xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-            xmlHttp.onreadystatechange = () => {
-                if (xmlHttp.readyState === XMLHttpRequest.DONE && xmlHttp.status === 200) {
+            xmlHttp.onload = () => {
+                
 
                     displayWeather(JSON.parse(xmlHttp.response)); //success
 
-                } else {
-                    document.querySelector(".city").innerText = "For weather info:";
-                    document.querySelector(".humidity").innerHTML = `
-                        <div class="error-weather">
-                        <p>- Turn on your device location</p>
-                        <p>- Allow to access your location</p>
-                        <p>- Refresh the page</p>
-                        </div>` //otherwise, some other code was returned
-                }
+                
 
             }
 
