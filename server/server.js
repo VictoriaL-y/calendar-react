@@ -8,6 +8,8 @@ const app = express()
 // My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
+const PORT = process.env.PORT || 8000
+
 app.use(cors())
 
 app.use(function (req, res, next) {
@@ -62,6 +64,6 @@ app.get("/geolocation/:latitude/:longitude", (req, res, next) => {
 
 })
 
-app.listen(process.env.PORT || 8000, () => {
-    console.log("Server is listening on 8000");
+app.listen(PORT, () => {
+    console.log(`Server is listening on ${PORT}`);
 })
