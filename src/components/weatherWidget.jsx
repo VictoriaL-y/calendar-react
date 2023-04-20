@@ -29,7 +29,7 @@ function WeatherWidget() {
             }
 
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET", weatherFetchUrl, false); // false for synchronous request
+            xmlHttp.open("GET", weatherFetchUrl, true); // false for synchronous request
 
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4) {   //if complete
@@ -50,8 +50,6 @@ function WeatherWidget() {
             }
 
             xmlHttp.send(null);
-            console.log("XXXXX ->> " + xmlHttp.response)
-
 
         }
         const error = () => {
