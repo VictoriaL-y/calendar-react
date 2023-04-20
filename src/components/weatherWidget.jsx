@@ -29,27 +29,18 @@ function WeatherWidget() {
             }
 
             var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET", weatherFetchUrl, true); // false for synchronous request
-            xmlHttp.send(null);
+            
 
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4) {   //if complete
-                    if (xmlHttp.status === 200) {  //check if "OK" (200)
 
                         displayWeather(JSON.parse(xmlHttp.response)); //success
-                        
-                    } else {
-                        document.querySelector(".city").innerText = "For weather info:";
-                        document.querySelector(".humidity").innerHTML = `
-                        <div class="error-weather">
-                        <p>- Turn on your device location</p>
-                        <p>- Allow to access your location</p>
-                        <p>- Refresh the page</p>
-                        </div>` //otherwise, some other code was returned
-                    }
+                    
                 }
                 
             }
+            xmlHttp.open("GET", weatherFetchUrl, true); // false for synchronous request
+            xmlHttp.send(null);
 
             
 
