@@ -8,10 +8,11 @@ const app = express()
 
 app.use(bodyParser.json());
 
-// My API_KEY is stored in the folder .env
+// My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
-const PORT = 8000
+const hostname = "127.0.0.1";
+const PORT = process.env.REACT_APP_PORT || 8000
 
 app.use(cors())
 
@@ -53,7 +54,9 @@ app.get("/geolocation/:latitude/:longitude", (req, res) => {
                     ).then((response) => response.json())
                         .then((data) => {
                             // get all json weather of the current city
-                            res.status(200).json({ data })
+                            res.status(200).json({ data });
+                            res.setHeader("Content-Type", "text/plain");
+                            res.end("Login failed");
                         });
                 }
             }
@@ -79,6 +82,6 @@ app.get("/geolocation/:latitude/:longitude", (req, res) => {
 
 })
 
-app.listen(PORT, () => {
+app.listen(PORT, hostname, () => {
     console.log(`Server is listening on ${PORT}`);
 })
