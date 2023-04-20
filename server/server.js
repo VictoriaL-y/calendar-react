@@ -12,20 +12,20 @@ const PORT = process.env.PORT || 5000
 
 app.use(cors())
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
+// const { createProxyMiddleware } = require('http-proxy-middleware');
 
-module.exports = function(app) {
-  app.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'http://localhost:5000',
-      changeOrigin: true,
-    })
-  );
-};
+// module.exports = function(app) {
+//   app.use(
+//     '/api',
+//     createProxyMiddleware({
+//       target: 'http://localhost:8000',
+//       changeOrigin: true,
+//     })
+//   );
+// };
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:5000"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "http://localhost:8000", "http://127.0.0.1:8000"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });

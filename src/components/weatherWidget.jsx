@@ -11,7 +11,7 @@ function WeatherWidget() {
             lat = position.coords.latitude;
             long = position.coords.longitude;
 
-            const weatherFetchUrl = "http://localhost:5000/geolocation/" + lat + "/" + long;
+            const weatherFetchUrl = "http://127.0.0.1:8000/geolocation/" + lat + "/" + long;
 
             const displayWeather = function (data) {
                 const { name } = data.data;
@@ -30,6 +30,7 @@ function WeatherWidget() {
 
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("GET", weatherFetchUrl, true); // false for synchronous request
+            xmlHttp.send(null);
 
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState === 4) {   //if complete
@@ -47,9 +48,12 @@ function WeatherWidget() {
                         </div>` //otherwise, some other code was returned
                     }
                 }
+                
             }
 
-            xmlHttp.send(null);
+            
+
+            
 
         }
         const error = () => {
