@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 // My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
-const hostname = "127.0.0.1";
+const hostname = "192.168.0.198";
 const PORT = process.env.REACT_APP_PORT || 8000
 
 app.use(cors())
