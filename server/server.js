@@ -8,7 +8,7 @@ const app = express()
 // My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 5000
 
 app.use(cors())
 
@@ -18,7 +18,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:8000',
+      target: 'http://127.0.0.1:5000',
       changeOrigin: true,
     })
   );
