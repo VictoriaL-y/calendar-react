@@ -12,7 +12,13 @@ const PORT = process.env.PORT || 8000
 
 app.use(cors())
 
-app.get("/geolocation/:latitude/:longitude", (req, res) => {
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "calendar-react-victorial-y.netlify.app"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+app.get("/geolocation/:latitude/:longitude", (req, res, next) => {
     const latitude = req.params.latitude;
     const longitude = req.params.longitude;
     try {
