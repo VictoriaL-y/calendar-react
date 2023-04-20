@@ -8,15 +8,13 @@ const app = express()
 // My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
 
-const PORT = process.env.PORT || 8000
-
 app.use(cors())
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "calendar-react-victorial-y.netlify.app"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-  });
+});
 
 app.get("/geolocation/:latitude/:longitude", (req, res, next) => {
     const latitude = req.params.latitude;
@@ -64,4 +62,6 @@ app.get("/geolocation/:latitude/:longitude", (req, res, next) => {
 
 })
 
-app.listen(PORT, 'localhost', () => console.log(`Server is listening on ${PORT}`))
+app.listen(process.env.PORT || 8000, () => {
+    console.log("Server is listening on 8000");
+})
