@@ -1,9 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import fetch from 'node-fetch'
+import bodyParser from "body-parser"
 import { } from 'dotenv/config'
 
 const app = express()
+
+app.use(bodyParser.json());
 
 // My API_KEY and PORT are stored in the folder .env
 const API_KEY = process.env.REACT_APP_API_KEY
