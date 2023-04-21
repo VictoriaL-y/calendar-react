@@ -1,23 +1,19 @@
 import React, { useEffect } from "react";
 
 function WeatherWidget() {
-    let lat;
-    let long;
 
     // Get your current position
     useEffect(() => {
-        const success = (position) => {
 
-            lat = position.coords.latitude;
-            long = position.coords.longitude;
+        const success = async (position) => {
 
-            const weatherFetchUrl = "http://calendar-react-victorial-y.netlify.app/geolocation/" + lat + "/" + long;
+            const { latitude: lat, longitude: long } = position.coords;
 
             const displayWeather = function (data) {
-                const { name } = data.data;
-                const { icon, description } = data.data.weather[0];
-                const { temp, humidity } = data.data.main;
-                const { speed } = data.data.wind;
+                const { name } = data;
+                const { icon, description } = data.weather[0];
+                const { temp, humidity } = data.main;
+                const { speed } = data.wind;
                 if (name != null) {
                     document.querySelector(".city").innerText = "Weather in " + name;
                     document.querySelector(".icon").src = "https://openweathermap.org/img/wn/" + icon + "@2x.png";
@@ -28,25 +24,11 @@ function WeatherWidget() {
                 }
             }
 
-            var xmlHttp = new XMLHttpRequest();
-            xmlHttp.open("GET", weatherFetchUrl, true); // false for synchronous request
-
-
-            xmlHttp.onload = () => {
-                
-
-                    displayWeather(JSON.parse(xmlHttp.response)); //success
-
-                
-
-            }
-
-            xmlHttp.send(null);
-
-
-
-
-
+            await fetch(`/.netlify/functions/api?lat=${lat}&long=${long}`)
+                .then(response => response.json())
+                .then(response => {
+                    displayWeather(response);
+                });
         }
         const error = () => {
             document.querySelector(".city").innerText = "For weather info:";
@@ -57,6 +39,7 @@ function WeatherWidget() {
             <p>- Refresh the page</p>
             </div>`
         }
+
         navigator.geolocation.getCurrentPosition(success, error);
     }, []);
 
