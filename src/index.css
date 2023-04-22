@@ -45,6 +45,8 @@ body .calendar {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+
 }
 
 .description {
@@ -639,6 +641,7 @@ body .calendar {
   background-color: #e1e0e0;
 }
 
+
 /* media queries */
 
 @media screen and (max-width: 991px) {
@@ -809,9 +812,5 @@ body .calendar {
   #root .card {
     padding-top: 65%;
     height: 100vh;
-    /* margin-left: calc(var(--bs-gutter-x) * .9 * -1);
-    margin-right: calc(var(--bs-gutter-x) * .9 * -1);
-    background-image: url(https://res.cloudinary.com/devqm7qmb/image/upload/v1679158253/ganapathy-kumar-i8bK-Xon0tk-unsplash_jam4tv.jpg);
-    box-shadow: inset 0 0 0 50vw rgb(0 0 0 / 40%); */
   }
 }
