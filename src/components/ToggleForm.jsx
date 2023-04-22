@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CheckOutsideClick from "./CheckOutsideClick";
 import TimePicker from 'react-time-picker';
 
@@ -10,6 +10,8 @@ const ToggleForm = ({ onSave, editId, onOpen, setOnOpen, setEditId, events, clic
     const [errorStartingTime, setErrorStartingTime] = useState(false);
     const [errorEndingTime, setErrorEndingTime] = useState(false);
     const [show, setShow] = useState(false);
+    // after pressed a button get focused on the event's name input field
+    const inputRef = useRef(null);
     const toggle = () => {
         // get away error classes from inout forms
         setErrorTitle(false);
@@ -22,7 +24,7 @@ const ToggleForm = ({ onSave, editId, onOpen, setOnOpen, setEditId, events, clic
         } else {
             //clean all the input in the toggle form
             setTitle("");
-            setStartingTime('');
+            setStartingTime('00:00');
             setEndingTime('');
             //close the toggle form and clear the id of the clicked and editing event
             setShow(!show);
@@ -154,7 +156,12 @@ const ToggleForm = ({ onSave, editId, onOpen, setOnOpen, setEditId, events, clic
     return (
         <CheckOutsideClick onClickOutside={handleClose}>
 
-            <button id="buttAddEvent" onClick={toggle}>
+            <button id="buttAddEvent" onClick={() => {
+                toggle();
+                if (!show || !onOpen) {
+                    inputRef.current.focus();
+                }
+            }}>
                 <i className="fa-regular fa-square-plus"></i>
             </button>
 
@@ -165,7 +172,7 @@ const ToggleForm = ({ onSave, editId, onOpen, setOnOpen, setEditId, events, clic
                 </div>
                 <div className="add-event-body">
                     <div className="add-event-input">
-                        <input value={title} onChange={e => setTitle(e.target.value)} type="text"
+                        <input ref={inputRef} value={title} onChange={e => setTitle(e.target.value)} type="text"
                             placeholder="Event Name" className={`event-name ${(errorTitle) ? 'error' : ''}`} />
                     </div>
                     <div className="add-event-input">
