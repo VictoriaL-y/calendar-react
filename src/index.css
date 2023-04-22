@@ -45,8 +45,6 @@ body .calendar {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-
 }
 
 .description {
@@ -811,5 +809,6 @@ body .calendar {
 @media screen and (max-width: 480px) {
   #root .card {
     padding-top: 65%;
+    height: 100vh;
   }
 }
