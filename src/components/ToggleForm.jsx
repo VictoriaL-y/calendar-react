@@ -25,7 +25,7 @@ const ToggleForm = ({ onSave, editId, onOpen, setOnOpen, setEditId, events, clic
             //clean all the input in the toggle form
             setTitle("");
             setStartingTime('00:00');
-            setEndingTime('');
+            setEndingTime('00:00');
             //close the toggle form and clear the id of the clicked and editing event
             setShow(!show);
             setOnOpen(false);
