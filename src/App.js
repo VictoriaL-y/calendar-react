@@ -13,9 +13,9 @@ const App = () => {
     // const handleWindowHeight = () => {
       setWindowHight(window.innerHeight * 0.01);
       document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
-      console.log(vh + " my vh");
+      console.log(windowHeight + " my vh");
       window.location.reload();
-      console.log(vh + " my vh 2");
+      console.log(windowHeight + " my vh 2");
     // }
     // window.addEventListener('resize', handleWindowHeight);
 
