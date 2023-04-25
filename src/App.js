@@ -12,6 +12,7 @@ const App = () => {
 
 
   if (!isreload) {
+    setWindowHight(window.innerHeight * 0.01);
     document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
     console.log(windowHeight);
     setIsReload(true);
