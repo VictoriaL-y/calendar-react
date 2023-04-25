@@ -5,12 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 const App = () => {
-  const [windowHeight, setWindowHight] = useState(window.innerHeight);
+  const [windowHeight, setWindowHight] = useState(window.innerHeight * 0.01);
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
 
   useEffect(() => {
     const handleWindowHeight = () => {
-      setWindowHight(window.innerHeight);
+      setWindowHight(window.innerHeight * 0.01);
       document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
     }
     window.addEventListener('resize', handleWindowHeight);
