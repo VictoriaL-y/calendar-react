@@ -5,26 +5,31 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 const App = () => {
-  const [windowHeight, setWindowHight] = useState (window.innerHeight * 0.01);
+  const [windowHeight, setWindowHight] = useState(window.innerHeight * 0.01);
   const [isreload, setIsReload] = ('false');
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
-    console.log(windowHeight);
+  console.log(windowHeight);
 
   useEffect(() => {
-    setTimeout(() => {
-    // const handleWindowHeight = () => {
+    // setTimeout(() => {
+    const handleWindowHeight = () => {
       setWindowHight(window.innerHeight * 0.01);
       document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
       console.log(windowHeight + " my vh");
-      
-    // }
-    // window.addEventListener('resize', handleWindowHeight);
 
-    // return() => {
-    //   window.removeEventListener('resize', handleWindowHeight);
-    // }
+    }
+    if (!isreload) {
+      console.log("Reload!")
+      window.location.reload();
+      setIsReload(true);
+      window.addEventListener('resize', handleWindowHeight);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleWindowHeight);
+    }
   }, [])
-}, 2000)
+  // }, 2000)
 
   // setTimeout(() => {
   //   if(!isreload) {
