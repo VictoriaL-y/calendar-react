@@ -24,11 +24,12 @@ const App = () => {
     if (!isreload) {
     setIsReload(true);
     window.addEventListener('resize', handleWindowHeight);
-    }
-
     return () => {
       window.removeEventListener('resize', handleWindowHeight);
     }
+    }
+
+    
     }, [])
   // }
 
