@@ -5,20 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 const App = () => {
-  const [windowHeight, setWindowHight] = useState(window.innerHeight * 0.01);
+  const [windowHeight, setWindowHight] = useState ('body'.innerHeight * 0.01);
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
 
-  useEffect(() => {
-    const handleWindowHeight = () => {
-      setWindowHight(window.innerHeight * 0.01);
-      document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
-    }
-    window.addEventListener('resize', handleWindowHeight);
+  // useEffect(() => {
+  //   const handleWindowHeight = () => {
+  //     setWindowHight(window.innerHeight * 0.01);
+  //     document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
+  //   }
+  //   window.addEventListener('resize', handleWindowHeight);
 
-    return() => {
-      window.removeEventListener('resize', handleWindowHeight);
-    }
-  }, [])
+  //   return() => {
+  //     window.removeEventListener('resize', handleWindowHeight);
+  //   }
+  // }, [])
 
   //First we get the viewport height and we multiple it by 1% to get a value for a vh unit
   // const vh = window.innerHeight * 0.01;
