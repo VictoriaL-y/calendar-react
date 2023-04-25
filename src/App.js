@@ -13,32 +13,19 @@ const App = () => {
   if (!isreload) {
     // useEffect(() => {
     // setTimeout(() => {
-    const handleWindowHeight = () => {
+    // const handleWindowHeight = () => {
       setWindowHight(window.innerHeight * 0.01);
       document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
       console.log(windowHeight + " my vh");
 
-    }
-    console.log("Reload!")
-    // window.location.reload();
+    // }
     setIsReload(true);
-    window.addEventListener('resize', handleWindowHeight);
+    // window.addEventListener('resize', handleWindowHeight);
 
-    return () => {
-      window.removeEventListener('resize', handleWindowHeight);
-    }
-    // }, [])
+    // return () => {
+    //   window.removeEventListener('resize', handleWindowHeight);
+    // }
   }
-  // }, 2000)
-
-  // setTimeout(() => {
-  //   if(!isreload) {
-  //     console.log("Reload!")
-  //     window.location.reload();
-  //     setIsReload(true);
-  //   }
-  //   console.log(windowHeight + " my vh 2");
-  // }, 2000)
 
   return (
     <>
