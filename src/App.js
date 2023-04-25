@@ -11,7 +11,7 @@ const App = () => {
   console.log(windowHeight);
 
   // if (!isreload) {
-    useEffect(() => {
+  useEffect(() => {
     // setTimeout(() => {
     const handleWindowHeight = () => {
       setWindowHight(window.innerHeight * 0.01);
@@ -22,15 +22,18 @@ const App = () => {
     console.log("Reload!")
     // window.location.reload();
     if (!isreload) {
-    setIsReload(true);
-    window.addEventListener('resize', handleWindowHeight);
-    return () => {
-      window.removeEventListener('resize', handleWindowHeight);
-    }
+      setIsReload(true);
+      console.log(isreload + " is isReload")
+      window.addEventListener('resize', handleWindowHeight);
+      return () => {
+        window.removeEventListener('resize', handleWindowHeight);
+      }
+    } else {
+      return
     }
 
-    
-    }, [])
+
+  }, [])
   // }
 
 
