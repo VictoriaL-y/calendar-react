@@ -10,13 +10,15 @@ const App = () => {
   // document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
   // console.log(windowHeight);
 
-
+setTimeout(() => {
   if (!isreload) {
     setWindowHight(window.innerHeight * 0.01);
     document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
     console.log(windowHeight);
     setIsReload(true);
   }
+}, 2000)
+  
 
 
   // if (!isreload) {
