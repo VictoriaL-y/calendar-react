@@ -5,7 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 const App = () => {
-  const [windowHeight, setWindowHight] = useState ('body'.innerHeight * 0.01);
+  const [windowHeight, setWindowHight] = useState (document.body.clientHeight * 0.01);
+  console.log(document.body.innerHeight + " " + document.body.clientHeight)
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
 
   // useEffect(() => {
