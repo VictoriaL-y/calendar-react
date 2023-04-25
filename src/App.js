@@ -7,7 +7,7 @@ import './index.css';
 const App = () => {
   const [windowHeight, setWindowHight] = useState (window.innerHeight * 0.01);
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
-    console.log(vh);
+    console.log(windowHeight);
 
   useEffect(() => {
     // const handleWindowHeight = () => {
