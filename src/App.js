@@ -10,30 +10,38 @@ const App = () => {
   // document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
   // console.log(windowHeight);
 
+
+  if (!isreload) {
+    document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
+    console.log(windowHeight);
+    setIsReload(true);
+  }
+
+
   // if (!isreload) {
-  useEffect(() => {
-    // setTimeout(() => {
-    const handleWindowHeight = () => {
-      setWindowHight(window.innerHeight * 0.01);
-      document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
-      console.log(windowHeight + " my vh");
+  // useEffect(() => {
+  //   // setTimeout(() => {
+  //   const handleWindowHeight = () => {
+  //     setWindowHight(window.innerHeight * 0.01);
+  //     document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
+  //     console.log(windowHeight + " my vh");
 
-    }
-    console.log("Reload!")
-    // window.location.reload();
-    if (!isreload) {
-      setIsReload(true);
-      console.log(isreload + " is isReload")
-      window.addEventListener('resize', handleWindowHeight);
-      return () => {
-        window.removeEventListener('resize', handleWindowHeight);
-      }
-    } else {
-      return
-    }
+  //   }
+  //   console.log("Reload!")
+  //   // window.location.reload();
+  //   if (!isreload) {
+  //     setIsReload(true);
+  //     console.log(isreload + " is isReload")
+  //     window.addEventListener('resize', handleWindowHeight);
+  //     return () => {
+  //       window.removeEventListener('resize', handleWindowHeight);
+  //     }
+  //   } else {
+  //     return
+  //   }
 
 
-  }, [])
+  // }, [])
   // }
 
 
