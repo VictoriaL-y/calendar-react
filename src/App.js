@@ -15,12 +15,7 @@ const App = () => {
       setWindowHight(window.innerHeight * 0.01);
       document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
       console.log(windowHeight + " my vh");
-      if(!isreload) {
-        console.log("Reload!")
-        window.location.reload();
-        setIsReload(true);
-      }
-      console.log(windowHeight + " my vh 2");
+      
     // }
     // window.addEventListener('resize', handleWindowHeight);
 
@@ -28,6 +23,15 @@ const App = () => {
     //   window.removeEventListener('resize', handleWindowHeight);
     // }
   }, [])
+
+  setTimeout(() => {
+    if(!isreload) {
+      console.log("Reload!")
+      window.location.reload();
+      setIsReload(true);
+    }
+    console.log(windowHeight + " my vh 2");
+  }, 2000)
 
   return (
     <>
