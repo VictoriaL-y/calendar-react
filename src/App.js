@@ -7,11 +7,15 @@ import './index.css';
 const App = () => {
   const [windowHeight, setWindowHight] = useState (window.innerHeight * 0.01);
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
+    console.log(vh);
 
   useEffect(() => {
     // const handleWindowHeight = () => {
       setWindowHight(window.innerHeight * 0.01);
       document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
+      console.log(vh + " my vh");
+      window.location.reload();
+      console.log(vh + " my vh 2");
     // }
     // window.addEventListener('resize', handleWindowHeight);
 
@@ -19,13 +23,6 @@ const App = () => {
     //   window.removeEventListener('resize', handleWindowHeight);
     // }
   }, [])
-
-  //First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-  // const vh = window.innerHeight * 0.01;
-  // console.log(vh);
-  // // Then we set the value in the --vh custom property to the root of the document
-  // document.documentElement.style.setProperty('--vh', `${vh}px`);
-  // console.log("my height is " + vh);
 
   return (
     <>
