@@ -6,7 +6,7 @@ import './index.css';
 
 const App = () => {
   const [windowHeight, setWindowHight] = useState(window.innerHeight * 0.01);
-  const [isreload, setIsReload] = ('false');
+  const [isreload, setIsReload] = (false);
   document.documentElement.style.setProperty('--vh', `${windowHeight}px`);
   console.log(windowHeight);
 
