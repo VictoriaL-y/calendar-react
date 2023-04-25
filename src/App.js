@@ -17,7 +17,7 @@ setTimeout(() => {
     console.log(windowHeight);
     setIsReload(true);
   }
-}, 2000)
+}, 1000)
   
 
 
